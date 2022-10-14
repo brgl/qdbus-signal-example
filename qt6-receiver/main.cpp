@@ -14,9 +14,6 @@ Receiver::~Receiver() { }
 void Receiver::InterfacesAdded(QDBusObjectPath object_path,
 			       QMap<QString, QVariantMap> interfaces_and_properties)
 {
-	Q_UNUSED(object_path);
-	Q_UNUSED(interfaces_and_properties);
-
 	qInfo() << "InterfacesAdded: " << object_path.path() << " " << interfaces_and_properties;
 }
 
