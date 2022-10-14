@@ -1,0 +1,6 @@
+Makefile
+.qmake.stash
+*.o
+moc_*.h
+moc_*.cpp
+receiver

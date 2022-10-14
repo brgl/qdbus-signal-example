@@ -1,0 +1,3 @@
+PyGObject
+pydbus
+git+https://github.com/seebz/pydbus-manager@6b576b9#egg=pydbus-manager
