@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QtWidgets/QApplication>
 #include <QtDBus/QDBusInterface>
+#include <QtDBus/QDBusMetaType>
 
 #include "receiver.hpp"
 
@@ -12,16 +13,22 @@ Receiver::Receiver(QObject *parent) : QObject(parent) { }
 Receiver::~Receiver() { }
 
 void Receiver::InterfacesAdded(QDBusObjectPath object_path,
-			       QMap<QString, QVariantMap> interfaces_and_properties)
+			       QDBusVariantMapMap interfaces_and_properties)
 {
-	qInfo() << "InterfacesAdded: " << object_path.path() << " " << interfaces_and_properties;
+	Q_UNUSED(interfaces_and_properties);
+
+	qInfo() << "InterfacesAdded: " << object_path.path();
 }
 
 int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
+
 	auto bus = QDBusConnection::sessionBus();
 	Receiver receiver;
+
+	qDBusRegisterMetaType<QDBusVariantMap>();
+	qDBusRegisterMetaType<QDBusVariantMapMap>();
 
 	qInfo() << "Before connection";
 	qInfo() << "Is connected " << bus.isConnected();
@@ -33,7 +40,7 @@ int main(int argc, char **argv)
 		"org.freedesktop.DBus.ObjectManager",
 		"InterfacesAdded",
 		&receiver,
-		SLOT(InterfacesAdded(QDBusObjectPath, QMap<QString, QVariantMap>))
+		SLOT(InterfacesAdded(QDBusObjectPath, QDBusVariantMapMap))
 	);
 
 	qInfo() << "connect() result: " << ret;

@@ -6,6 +6,11 @@
 #include <QVariant>
 #include <QString>
 
+typedef QMap<QString, QDBusVariant> QDBusVariantMap;
+Q_DECLARE_METATYPE(QDBusVariantMap);
+typedef QMap<QString, QDBusVariantMap> QDBusVariantMapMap;
+Q_DECLARE_METATYPE(QDBusVariantMapMap);
+
 class Receiver : public QObject
 {
 	Q_OBJECT
@@ -16,6 +21,6 @@ public:
 
 private slots:
 	void InterfacesAdded(QDBusObjectPath object_path,
-			     QMap<QString, QVariantMap> interfaces_and_properties);
+			     QDBusVariantMapMap interfaces_and_properties);
 };
 
