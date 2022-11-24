@@ -3,9 +3,11 @@
 
 import pydbus
 import pydbus_manager
+import sys
 
 from gi.repository import GLib
 from functools import partial
+
 
 class Provider:
     """
@@ -20,14 +22,20 @@ class Provider:
     def FooBar(self):
         return "foobar foobar"
 
+
 def add_interface(manager):
     print("Adding object")
-    manager.register_object("/org/foobar/Provider1/FooBar", Provider(), None);
+    manager.register_object("/org/foobar/Provider1/FooBar", Provider(), None)
     return GLib.SOURCE_REMOVE
+
 
 if __name__ == "__main__":
     loop = GLib.MainLoop()
-    bus = pydbus.SessionBus()
+    bus = (
+        pydbus.SystemBus()
+        if len(sys.argv) == 2 and sys.argv[1] == "system"
+        else pydbus.SessionBus()
+    )
     manager = pydbus_manager.Manager(bus, "org.foobar.Provider1")
 
     print("Registered the object manager")

@@ -24,7 +24,8 @@ int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
 
-	auto bus = QDBusConnection::sessionBus();
+	auto bus = (argc == 2 && QString(argv[1]) == "system") ?
+		QDBusConnection::systemBus() : QDBusConnection::sessionBus();
 	Receiver receiver;
 
 	qDBusRegisterMetaType<QDBusVariantMap>();
