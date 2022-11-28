@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: WTFPL
+# SPDX-License-Identifier: MIT
 
 import pydbus
 import pydbus_manager

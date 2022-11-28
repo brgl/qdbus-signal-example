@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: WTFPL
+// SPDX-License-Identifier: MIT
 
 #include <QtGlobal>
 #include <QDebug>

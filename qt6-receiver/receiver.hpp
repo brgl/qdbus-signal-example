@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: WTFPL */
+/* SPDX-License-Identifier: MIT */
 
 #include <QObject>
 #include <QtDBus/QDBusObjectPath>
